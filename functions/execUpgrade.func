@@ -1,0 +1,43 @@
+# This function needs an argument
+# exec format : exec Upgrade "appfile"
+
+function execUpgrade(){
+
+# file check
+fileCheck $1
+
+# (upgrade Apps only when the configuration file exists)
+if [[ 0 -eq $? ]]
+then
+    cat $1 | while read line
+    do
+        # detect comment line
+        echo $line | grep -v '^#.*' > /dev/null
+
+        # execute upgrade if not comment line
+        if [ $? -eq 0 ];
+        then
+            # check a kind of upgrade
+            if [[ $1 = ${TGT_CASK_LIST} ]]
+            then
+                # brew upgrade --cask
+                upgradeCask $line
+
+            elif [[ $1 = ${TGT_MAS_LIST} ]]
+            then
+                # mas upgrade
+                upgradeMas $line
+
+            else
+                # brew upgrade
+                upgrade $line
+            fi
+            
+            for (( i = 0; i < 2; i++ ))
+            do
+                echo ""
+            done
+        fi
+    done
+fi
+}

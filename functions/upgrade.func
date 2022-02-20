@@ -1,0 +1,10 @@
+# This function needs an argument
+# exec format : upgrade "target upgrade filename"
+
+function upgrade(){
+echo "---------------"
+echo "brew upgrade "$1
+echo "---------------"
+#brew upgrade $1
+brew upgrade $1 | tee -a $OUT_LOG | tail -f
+}

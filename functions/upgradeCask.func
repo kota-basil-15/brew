@@ -1,0 +1,10 @@
+# This function needs an argument
+# exec format : upgradeCask "target upgrade cask filename"
+
+function upgradeCask(){
+echo "---------------"
+echo "brew upgrade --cask "$1
+echo "---------------"
+#brew upgrade --cask $1
+brew upgrade --cask $1 | tee -a $OUT_LOG | tail -f
+}

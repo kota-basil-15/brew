@@ -1,0 +1,17 @@
+# this function needs argument "LOG_DATE"
+# exec format : bundleDump directory date
+
+function bundleDump(){
+echo "---------------"
+echo "brew bundle dump"
+echo "---------------"
+cd $1
+
+# brew bundle dump
+brew bundle dump
+
+# rename
+mv Brewfile Brewfile_$2
+
+cd
+}

@@ -1,0 +1,6 @@
+function tapCheck(){
+echo "---------------"
+echo "brew tap"
+echo "---------------"
+brew tap homebrew/cask-drivers
+}
